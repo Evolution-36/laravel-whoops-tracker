@@ -1,0 +1,29 @@
+{
+    "name": "evolution36/laravel-whoops-tracker",
+    "description": "Packages for tracking all information about errors that occured in your application. Great for debugging errors in a production environment. Also provides a nice dashboard for displaying the errors.",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "^5.7@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Evolution36\\WhoopsTracker\\": "src"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Evolution36",
+            "email": "info@evolution36.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Evolution36\\WhoopsTracker\\WhoopsTrackerServiceProvider"
+            ]
+        }
+    }
+}
