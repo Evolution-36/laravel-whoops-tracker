@@ -2,10 +2,10 @@
 
 namespace Evolution36\WhoopsTracker;
 
-
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use Evolution36\WhoopsTracker\Models\LwtWhoops;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\DB;
 
 class WhoopsTracker
 {
@@ -24,10 +24,11 @@ class WhoopsTracker
 
     public function report(\Exception $exception)
     {
+        $dateTime = Carbon::now();
         $data = collect()
-            ->put('datetime', Carbon::now())
+            ->put('datetime', $dateTime)
             ->put('request', $this->requestToArray(request()))
-            ->put('exception', $this->exceptionToArray($exception))
+            ->put('trace', $this->exceptionToArray($exception))
             ->put('config', config()->all())
             ->put('queries', DB::getQueryLog())
             ->put('fileContext', $this->fileContext($exception->getFile(), $exception->getLine()));
@@ -41,11 +42,15 @@ class WhoopsTracker
             }
         }
 
+        $logLocation = storage_path('whoops-tracker') . '/' . Carbon::now()
+                ->format('d_m_Y_His') . '-' . uniqid() . '.json';
         try {
-            $fileSystem->put(storage_path('whoops-tracker') . '/' . Carbon::now(), json_encode($data));
+            $fileSystem->put($logLocation, json_encode($data));
         } catch (\Exception $e) {
             //TODO; error handling
         }
+
+        $this->saveWhoops($exception->getFile(), $exception->getLine(), $dateTime, $exception->getMessage(), $exception->getCode(), get_class($exception), $logLocation);
     }
 
     protected function exceptionToArray(\Exception $exception)
@@ -61,12 +66,7 @@ class WhoopsTracker
             }
             $traceWithContext[] = $traceItem;
         }
-        return [
-            'message' => $exception->getMessage(),
-            'class'   => get_class($exception),
-            'code'    => $exception->getCode(),
-            'trace'   => $traceWithContext,
-        ];
+        return $traceWithContext;
     }
 
     protected function requestToArray($request)
@@ -114,5 +114,21 @@ class WhoopsTracker
             }
         }
         return $context;
+    }
+
+    protected function saveWhoops($file, $line, $datetime, $message, $logLevel, $exceptionClass, $logLocation)
+    {
+        $hash = LwtWhoops::generateHash($file, $line, $message, $logLevel, $exceptionClass);
+        $whoops = LwtWhoops::firstOrNew(['hash' => $hash]);
+        $whoops->file = $file;
+        $whoops->line = $line;
+        $whoops->message = $message;
+        $whoops->log_level = $logLevel;
+        $whoops->occurred_at = $datetime;
+        $whoops->hash = $hash;
+        $whoops->exception_class = $exceptionClass;
+        $whoops->log_location = $logLocation;
+        $whoops->increaseCount();
+        $whoops->save();
     }
 }

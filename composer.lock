@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "db2b44b843a17f138a7b8d113d1d6530",
+    "content-hash": "fae8d15ba8995e7785c123e70b8edfc9",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -75,17 +75,105 @@
             "time": "2018-03-05 05:26:13"
         },
         {
-            "name": "illuminate/contracts",
-            "version": "dev-master",
+            "name": "illuminate/config",
+            "version": "5.6.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/illuminate/contracts.git",
-                "reference": "a112dab781c5d83dc2e558a7d795e58e783f6e8e"
+                "url": "https://github.com/illuminate/config.git",
+                "reference": "e8158dff3189deed846c84c66c60fa68c21ee579"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/a112dab781c5d83dc2e558a7d795e58e783f6e8e",
-                "reference": "a112dab781c5d83dc2e558a7d795e58e783f6e8e",
+                "url": "https://api.github.com/repos/illuminate/config/zipball/e8158dff3189deed846c84c66c60fa68c21ee579",
+                "reference": "e8158dff3189deed846c84c66c60fa68c21ee579",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.6.*",
+                "illuminate/support": "5.6.*",
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Config\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Config package.",
+            "homepage": "https://laravel.com",
+            "time": "2017-11-07 20:23:51"
+        },
+        {
+            "name": "illuminate/container",
+            "version": "5.6.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/container.git",
+                "reference": "4a42d667a05ec6d31f05b532cdac7e8e68e5ea2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/4a42d667a05ec6d31f05b532cdac7e8e68e5ea2a",
+                "reference": "4a42d667a05ec6d31f05b532cdac7e8e68e5ea2a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.6.*",
+                "php": "^7.1.3",
+                "psr/container": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Container\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Container package.",
+            "homepage": "https://laravel.com",
+            "time": "2018-01-21 02:13:38"
+        },
+        {
+            "name": "illuminate/contracts",
+            "version": "5.6.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/contracts.git",
+                "reference": "00a8296c63b6429eb8705d2700c2436ea193c553"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/00a8296c63b6429eb8705d2700c2436ea193c553",
+                "reference": "00a8296c63b6429eb8705d2700c2436ea193c553",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +184,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.7-dev"
+                    "dev-master": "5.6-dev"
                 }
             },
             "autoload": {
@@ -116,26 +204,85 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2018-02-21 13:51:12"
+            "time": "2018-02-20 16:46:51"
         },
         {
-            "name": "illuminate/support",
-            "version": "dev-master",
+            "name": "illuminate/database",
+            "version": "5.6.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/illuminate/support.git",
-                "reference": "59ffd3d5f1966a3555dbcc1e30ecf9050d57905d"
+                "url": "https://github.com/illuminate/database.git",
+                "reference": "0d39d9b9c7e3982825a269a12ab26e55347366f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/59ffd3d5f1966a3555dbcc1e30ecf9050d57905d",
-                "reference": "59ffd3d5f1966a3555dbcc1e30ecf9050d57905d",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/0d39d9b9c7e3982825a269a12ab26e55347366f6",
+                "reference": "0d39d9b9c7e3982825a269a12ab26e55347366f6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "5.6.*",
+                "illuminate/contracts": "5.6.*",
+                "illuminate/support": "5.6.*",
+                "php": "^7.1.3"
+            },
+            "suggest": {
+                "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.6).",
+                "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
+                "illuminate/console": "Required to use the database commands (5.6.*).",
+                "illuminate/events": "Required to use the observers with Eloquent (5.6.*).",
+                "illuminate/filesystem": "Required to use the migrations (5.6.*).",
+                "illuminate/pagination": "Required to paginate the result set (5.6.*)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Database\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Database package.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "database",
+                "laravel",
+                "orm",
+                "sql"
+            ],
+            "time": "2018-03-08 14:36:33"
+        },
+        {
+            "name": "illuminate/support",
+            "version": "5.6.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/support.git",
+                "reference": "c74e5a0a4cdd599f65a615398041cc1be19cc86f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/c74e5a0a4cdd599f65a615398041cc1be19cc86f",
+                "reference": "c74e5a0a4cdd599f65a615398041cc1be19cc86f",
                 "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "~1.1",
                 "ext-mbstring": "*",
-                "illuminate/contracts": "5.7.*",
+                "illuminate/contracts": "5.6.*",
                 "nesbot/carbon": "^1.20",
                 "php": "^7.1.3"
             },
@@ -150,7 +297,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.7-dev"
+                    "dev-master": "5.6-dev"
                 }
             },
             "autoload": {
@@ -173,7 +320,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-03-04 22:37:56"
+            "time": "2018-03-04 15:11:54"
         },
         {
             "name": "nesbot/carbon",
@@ -456,9 +603,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "illuminate/support": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
