@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Evolution36') }} - @yield('title')</title>
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="/vendor/whoops-tracker/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Scripts -->
@@ -35,7 +35,7 @@
 </footer>
 
 <!-- Scripts -->
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="/vendor/whoops-tracker/css/app.js"></script>
 @stack('js')
 </body>
 </html>

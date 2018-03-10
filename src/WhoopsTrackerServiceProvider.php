@@ -21,6 +21,9 @@ class WhoopsTrackerServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'whoops-tracker');
+        $this->publishes([
+            __DIR__.'/public' => public_path('vendor/whoops-tracker'),
+        ], 'public');
     }
 
     /**
