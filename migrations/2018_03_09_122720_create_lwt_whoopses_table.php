@@ -18,12 +18,10 @@ class CreateLwtWhoopsesTable extends Migration
             $table->string('hash');
             $table->text('file');
             $table->string('line');
-            $table->dateTime('occurred_at');
             $table->text('message');
-            $table->integer('count');
             $table->string('log_level');
-            $table->string('log_location');
             $table->string('exception_class');
+            $table->integer('status');
             $table->timestamps();
         });
     }

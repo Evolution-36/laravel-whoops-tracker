@@ -3,6 +3,7 @@
 namespace Evolution36\WhoopsTracker;
 
 use Carbon\Carbon;
+use Evolution36\WhoopsTracker\Models\LwtOccurrence;
 use Evolution36\WhoopsTracker\Models\LwtWhoops;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\DB;
@@ -116,19 +117,22 @@ class WhoopsTracker
         return $context;
     }
 
-    protected function saveWhoops($file, $line, $datetime, $message, $logLevel, $exceptionClass, $logLocation)
+    protected function saveWhoops($file, $line, $dateTime, $message, $logLevel, $exceptionClass, $logLocation)
     {
         $hash = LwtWhoops::generateHash($file, $line, $message, $logLevel, $exceptionClass);
-        $whoops = LwtWhoops::firstOrNew(['hash' => $hash]);
-        $whoops->file = $file;
-        $whoops->line = $line;
-        $whoops->message = $message;
-        $whoops->log_level = $logLevel;
-        $whoops->occurred_at = $datetime;
-        $whoops->hash = $hash;
-        $whoops->exception_class = $exceptionClass;
-        $whoops->log_location = $logLocation;
-        $whoops->increaseCount();
-        $whoops->save();
+        $whoops = LwtWhoops::firstOrCreate([
+            'hash'            => $hash,
+            'file'            => $file,
+            'line'            => $line,
+            'message'         => $message,
+            'log_level'       => $logLevel,
+            'exception_class' => $exceptionClass,
+            'status'          => LwtWhoops::OPEN,
+        ]);
+
+        $occurrence = new LwtOccurrence();
+        $occurrence->occurred_at = $dateTime;
+        $occurrence->log_location = $logLocation;
+        $whoops->lwtOccurrences()->save($occurrence);
     }
 }
