@@ -1,4 +1,3 @@
-
 ## Current status
 - Assets can currently be compiled into a public directory within the package.
 - With `php artisan vendor:publish --tag=public`, users can publish the assets to their project
@@ -18,14 +17,17 @@ For installation in development see below
 - Clone the repository
 - Add the following section to the composer.json of your project
 
+```javascript
     "repositories": [
-         {
-             "type": "path",
-             "url": "../laravel-whoops-tracker",
-             "options": {
-                 "symlink": true
-             }
-         }
-     ],
-- Add `evolution36/laravel-whoops-tracker` to the composer.json of your project
+        {
+            "type": "path",
+            "url": "../laravel-whoops-tracker",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+```
+
+- Add `evolution36/laravel-whoops-tracker` to the requires-section of composer.json of your project
 - Run `composer update` in your project
