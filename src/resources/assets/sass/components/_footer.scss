@@ -1,0 +1,23 @@
+// Push footer to bottom
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1;
+}
+
+footer {
+    padding: 0 1rem;
+    background-color: $primary-color;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        color: white;
+        font-weight: bold;
+    }
+}

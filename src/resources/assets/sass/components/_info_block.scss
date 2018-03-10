@@ -1,0 +1,24 @@
+.info-block {
+    display: flex;
+    height: 80px;
+    padding: 0;
+    .icon-block {
+        min-width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+            font-size: 3rem;
+            color: white;
+        }
+    }
+
+    .content-block {
+        padding: 0 0.5rem;
+        p {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+    }
+}

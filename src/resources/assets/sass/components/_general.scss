@@ -1,0 +1,43 @@
+body {
+    background-color: color("blue-grey", "lighten-5");
+}
+
+header {
+    padding: 0 2rem;
+}
+
+
+main {
+    padding: 0 1rem 1rem;
+}
+
+section {
+    @extend .z-depth-1;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+}
+
+.form-inline {
+    display: inline-block;
+}
+
+.side-nav {
+    .header {
+        font-size: 3rem;
+    }
+
+    .background img {
+        width: 100%;
+    }
+}
+
+.inactive {
+    display: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    .btn-floating {
+        margin-left: 1rem;
+    }
+}
