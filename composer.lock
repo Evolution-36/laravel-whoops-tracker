@@ -322,12 +322,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/http.git",
-                "reference": "dc848b920b073293078097645471ad36d9c1f6db"
+                "reference": "39131ae386ff4b84903cdc3ae5a6dd2af2eb05ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/http/zipball/dc848b920b073293078097645471ad36d9c1f6db",
-                "reference": "dc848b920b073293078097645471ad36d9c1f6db",
+                "url": "https://api.github.com/repos/illuminate/http/zipball/39131ae386ff4b84903cdc3ae5a6dd2af2eb05ba",
+                "reference": "39131ae386ff4b84903cdc3ae5a6dd2af2eb05ba",
                 "shasum": ""
             },
             "require": {
@@ -360,7 +360,7 @@
             ],
             "description": "The Illuminate Http package.",
             "homepage": "https://laravel.com",
-            "time": "2018-03-06 20:06:11"
+            "time": "2018-03-09 14:19:22"
         },
         {
             "name": "illuminate/pipeline",
@@ -518,26 +518,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "c74e5a0a4cdd599f65a615398041cc1be19cc86f"
+                "reference": "080e319ccc3e74c8d3cd270210767613bf5c0ca9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/c74e5a0a4cdd599f65a615398041cc1be19cc86f",
-                "reference": "c74e5a0a4cdd599f65a615398041cc1be19cc86f",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/080e319ccc3e74c8d3cd270210767613bf5c0ca9",
+                "reference": "080e319ccc3e74c8d3cd270210767613bf5c0ca9",
                 "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "~1.1",
                 "ext-mbstring": "*",
                 "illuminate/contracts": "5.6.*",
-                "nesbot/carbon": "^1.20",
+                "nesbot/carbon": "^1.24.1",
                 "php": "^7.1.3"
             },
             "conflict": {
                 "tightenco/collect": "<5.5.33"
             },
             "suggest": {
-                "illuminate/filesystem": "Required to use the composer class (5.2.*).",
+                "illuminate/filesystem": "Required to use the composer class (5.6.*).",
                 "symfony/process": "Required to use the composer class (~4.0).",
                 "symfony/var-dumper": "Required to use the dd function (~4.0)."
             },
@@ -567,20 +567,20 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-03-04 15:11:54"
+            "time": "2018-03-10 19:46:22"
         },
         {
             "name": "nesbot/carbon",
-            "version": "dev-master",
+            "version": "1.24.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "a05bed23de4c00040fe33cc6820c7e6be8d00c04"
+                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a05bed23de4c00040fe33cc6820c7e6be8d00c04",
-                "reference": "a05bed23de4c00040fe33cc6820c7e6be8d00c04",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bba6c6e410c6b4317e37a9474aeaa753808c3875",
+                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +620,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-03-09 12:52:49"
+            "time": "2018-03-10T10:10:14+00:00"
         },
         {
             "name": "psr/container",
@@ -828,12 +828,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "5de2441e197e87d34299945085152004294354cd"
+                "reference": "606803460db12e1997cbde2504dfdd0175798885"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/5de2441e197e87d34299945085152004294354cd",
-                "reference": "5de2441e197e87d34299945085152004294354cd",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/606803460db12e1997cbde2504dfdd0175798885",
+                "reference": "606803460db12e1997cbde2504dfdd0175798885",
                 "shasum": ""
             },
             "require": {
@@ -883,7 +883,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2018-02-22 10:06:54"
+            "time": "2018-03-09 17:46:25"
         },
         {
             "name": "symfony/finder",
@@ -940,12 +940,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "4b4d7c898b2e4b04eca44478a564135bf9d4d14b"
+                "reference": "326df00d18fde2f18e22ab170c154cbbed262ff6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/4b4d7c898b2e4b04eca44478a564135bf9d4d14b",
-                "reference": "4b4d7c898b2e4b04eca44478a564135bf9d4d14b",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/326df00d18fde2f18e22ab170c154cbbed262ff6",
+                "reference": "326df00d18fde2f18e22ab170c154cbbed262ff6",
                 "shasum": ""
             },
             "require": {
@@ -986,7 +986,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-03-05 18:28:38"
+            "time": "2018-03-11 18:21:30"
         },
         {
             "name": "symfony/http-kernel",

@@ -16,5 +16,4 @@ mix.js('src/resources/assets/js/app.js', 'src/public/js')
         ]
     })
     .sourceMaps()
-    .copyDirectory('src/resources/assets/images', 'src/public/images')
-    .version();
+    .copyDirectory('src/resources/assets/images', 'src/public/images');
