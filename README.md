@@ -12,6 +12,14 @@
 For installation in development see below
 - `composer require evolution36/laravel-whoops-tracker`
 - `php artisan migrate`
+- Then add the whoops tracker to the report method of your app/Exceptions/Handler.php:
+```php
+public function report(Exception $exception)
+{
+    parent::report($exception);
+    app('whoops-tracker')->report($exception);
+}
+```
 
 ## Dev installation
 - Clone the repository

@@ -11,9 +11,11 @@
     },
     "devDependencies": {
         "cross-env": "^5.0.1",
-        "jquery": "^3.1.1",
-        "laravel-mix": "^1.0",
-        "postcss-cssnext": "^3.0.2",
-        "materialize-css": "^0.100.2"
+        "axios": "^0.18",
+        "laravel-mix": "^1.0"
+    },
+    "dependencies": {
+        "vue": "^2.5.15",
+        "vue-template-compiler": "^2.5.15"
     }
 }

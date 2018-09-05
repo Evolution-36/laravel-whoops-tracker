@@ -10,7 +10,7 @@ class WhoopsController extends Controller
 {
     public function index()
     {
-        return view('whoops-tracker::index')->with([
+        return view('lwt::index')->with([
             'whoopses' => LwtWhoops::with('lwtOccurrences')->get()
         ]);
     }

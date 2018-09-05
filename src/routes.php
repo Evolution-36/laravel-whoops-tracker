@@ -8,6 +8,6 @@
  * Routes for authentication
  */
 
-Route::group(['prefix' => 'lwt'], function() {
+Route::group(['prefix' => 'lwt', 'middleware' => 'web'], function() {
     Route::get('/', 'Evolution36\WhoopsTracker\Controllers\WhoopsController@index');
 });
