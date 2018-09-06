@@ -2,3 +2,12 @@
 @import "normalize.css";
 @import "skeleton.scss";
 
+#whoops-viewer {
+    padding: 2rem;
+}
+
+#whoops-table {
+    table-layout: fixed;
+    word-wrap: break-word;
+    width: 100%;
+}

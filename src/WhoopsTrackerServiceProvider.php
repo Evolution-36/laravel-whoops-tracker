@@ -25,7 +25,7 @@ class WhoopsTrackerServiceProvider extends \Illuminate\Support\ServiceProvider
         ], 'public');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'lwt');
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/vendor/whoops-tracker')
+            __DIR__.'/resources/views' => resource_path('views/vendor/whoops-tracker'),
         ], 'views');
     }
 

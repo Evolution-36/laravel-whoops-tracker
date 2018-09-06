@@ -17,9 +17,14 @@ For installation in development see below
 public function report(Exception $exception)
 {
     parent::report($exception);
-    app('whoops-tracker')->report($exception);
+    
+    if ($this->shouldReport($exception)) {
+        app('whoops-tracker')->report($exception);
+    }
 }
 ```
+- `php artisan vendor:publish --tag=public`
+- If you want to use LWT as is, just open /lwt in your browser. If you want to include it in another view, use `@include('vendor.whoops-tracker.index')`. In this case also publish the views `php artisan vendor:publish --tag=views`.
 
 ## Dev installation
 - Clone the repository

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/vendor/whoops-tracker/css/app.css">
 
 <div id="app">
-    <example-component whoopses-json="{{ $whoopses->toJson() }}"></example-component>
+    <lwt-viewer></lwt-viewer>
 </div>
 
 <!-- Scripts -->
