@@ -35,10 +35,8 @@
         },
         mounted() {
             axios.get('/lwt/whoopses').then(response => {
-                this.whoopses = response;
-                console.log(this.whoopses);
+                this.whoopses = response.data;
             });
-            console.log('Component mounted.')
         }
     }
 </script>
