@@ -18,7 +18,7 @@
                     <td>{{ whoops.exception_class }}</td>
                     <td>{{ whoops.file }}:{{ whoops.line }}</td>
                     <td>{{ whoops.lwt_occurrences.length }}</td>
-                    <td>{{ whoops.lwt_occurrences.pop().occurred_at }}</td>
+                    <td>{{ last_occurred_at(whoops.lwt_occurrences) }}</td>
                     <td>{{ whoops.status }}</td>
                 </tr>
             </tbody>
@@ -36,7 +36,17 @@
         mounted() {
             axios.get('/lwt/whoopses').then(response => {
                 this.whoopses = response.data;
+                console.log(this.whoopses);
             });
+        },
+        methods: {
+            last_occurred_at: function(lwt_occurrences){
+                return lwt_occurrences.map(
+                    function(occurrence) {
+                        return occurrence.occurred_at;
+                    }
+                ).sort()[0]
+            }
         }
     }
 </script>
