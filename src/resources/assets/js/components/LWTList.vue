@@ -7,8 +7,8 @@
                     <th>Message</th>
                     <th>Exception class</th>
                     <th>Location</th>
-                    <th>Occurences</th>
-                    <th>Last occurence</th>
+                    <th>Occurrences</th>
+                    <th>Last occurrence</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -16,9 +16,9 @@
                 <tr v-for="whoops in whoopses">
                     <td>{{ whoops.message }}</td>
                     <td>{{ whoops.exception_class }}</td>
-                    <td>{{ whoops.file }}:{{ whoops.line }}</td>
-                    <td>{{ whoops.lwt_occurrences.length }}</td>
-                    <td>{{ last_occurred_at(whoops.lwt_occurrences) }}</td>
+                    <td>{{ file_name(whoops.file) }}:{{ whoops.line }}</td>
+                    <td>{{ whoops.occurrences_count }}</td>
+                    <td>{{ whoops.last_occurred_at }}</td>
                     <td>{{ whoops.status }}</td>
                 </tr>
             </tbody>
@@ -40,12 +40,9 @@
             });
         },
         methods: {
-            last_occurred_at: function(lwt_occurrences){
-                return lwt_occurrences.map(
-                    function(occurrence) {
-                        return occurrence.occurred_at;
-                    }
-                ).sort()[0]
+            file_name: function(file) {
+                let parts = file.split('/');
+                return parts[parts.length-2] + '/' + parts[parts.length-1];
             }
         }
     }

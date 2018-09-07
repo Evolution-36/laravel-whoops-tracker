@@ -12,10 +12,6 @@ class LwtOccurrence extends Model
         'occurred_at'
     ];
 
-    protected $casts = [
-        'occurred_at' => 'datetime:Y-m-d'
-    ];
-
     public function lwtWhoops()
     {
         return $this->belongsTo('Evolution36\WhoopsTracker\Models\LwtWhoops');

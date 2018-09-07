@@ -16,6 +16,6 @@ class WhoopsController extends Controller
 
     public function getAll()
     {
-        return response()->json(LwtWhoops::with('lwtOccurrences')->get());
+        return response()->json(LwtWhoops::all());
     }
 }

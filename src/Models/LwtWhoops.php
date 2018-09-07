@@ -23,6 +23,11 @@ class LwtWhoops extends Model
         'updated_at',
     ];
 
+    protected $appends = [
+        'last_occurred_at',
+        'occurrences_count'
+    ];
+
     const OPEN = 0;
     const CLOSED = 1;
 
@@ -49,5 +54,15 @@ class LwtWhoops extends Model
     public function isClosed()
     {
         return $this->status == $this::CLOSED;
+    }
+
+    public function getLastOccurredAtAttribute()
+    {
+        return $this->lwtOccurrences()->orderBy('occurred_at','DESC')->first()->occurred_at->format('d M Y H:i');
+    }
+
+    public function getOccurrencesCountAttribute()
+    {
+        return $this->lwtOccurrences->count();
     }
 }
