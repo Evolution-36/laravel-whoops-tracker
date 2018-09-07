@@ -58,7 +58,7 @@ class LwtWhoops extends Model
 
     public function getLastOccurredAtAttribute()
     {
-        return $this->lwtOccurrences()->orderBy('occurred_at','DESC')->first()->occurred_at->format('d M Y H:i');
+        return $this->lwtOccurrences()->orderBy('occurred_at','DESC')->first()->occurred_at->format('c');
     }
 
     public function getOccurrencesCountAttribute()
