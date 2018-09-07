@@ -36,7 +36,6 @@
         mounted() {
             axios.get('/lwt/whoopses').then(response => {
                 this.whoopses = response.data;
-                console.log(this.whoopses);
             });
         },
         methods: {
