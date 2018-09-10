@@ -1,7 +1,7 @@
 <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/vendor/whoops-tracker/css/app.css">
 
-<div id="app">
+<div id="lwt">
     <router-view></router-view>
 </div>
 

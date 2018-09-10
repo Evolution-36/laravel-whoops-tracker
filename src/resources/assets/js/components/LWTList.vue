@@ -1,17 +1,24 @@
 <template>
-    <div id="whoops-viewer">
-        <h4>Whoopses</h4>
-        <div class="row lwt-whoops" v-for="whoops in whoopses">
-            <div class="four columns">
-                <h5>{{ whoops.message }}</h5>
-                <h6>{{ whoops.exception_class }}</h6>
-                <span class="render_timeago" :datetime="whoops.last_occurred_at">{{ whoops.last_occurred_at }}</span>
+    <div id="lwt-viewer">
+        <select v-model="status_filter" @change="filter" id="lwt-status-filter">
+            <option value="0">Open</option>
+            <option value="1">Busy</option>
+            <option value="2">Closed</option>
+        </select>
+        <div id="lwt-header" class="lwt-row">
+            <div class="lwt-8col">Error</div>
+            <div class="lwt-2col">Last occurence</div>
+            <div class="lwt-1col">Events</div>
+            <div class="lwt-1col">Status</div>
+        </div>
+        <div class="lwt-whoops lwt-row" v-for="whoops in whoopses">
+            <div class="lwt-8col">
+                <span class="error">{{ whoops.message }}</span>
+                <span class="exception">{{ whoops.exception_class }}</span>
             </div>
-
-            <p>{{ file_name(whoops.file) }}:{{ whoops.line }}</p>
-            <p>{{ whoops.occurrences_count }}</p>
-
-            <p>{{ whoops.status }}</p>
+            <div class="lwt-2col lwt-render-timeago" :datetime="whoops.last_occurred_at">{{ whoops.last_occurred_at }}</div>
+            <div class="lwt-1col">{{ whoops.occurrences_count }}</div>
+            <div class="lwt-1col">{{ status_name(whoops.status) }}</div>
         </div>
     </div>
 </template>
@@ -20,21 +27,30 @@
     export default {
         data () {
             return {
-                whoopses: []
+                whoopses: [],
+                all_whoopses: [],
+                status_filter: 0
             }
         },
         mounted() {
             axios.get('/lwt/whoopses').then(response => {
-                this.whoopses = response.data;
+                this.all_whoopses = response.data;
+                this.whoopses = this.all_whoopses;
             });
         },
         updated() {
-            window.timeago().render(document.querySelectorAll('.render_timeago'));
+            window.timeago().render(document.querySelectorAll('.lwt-render-timeago'));
         },
         methods: {
-            file_name: function(file) {
-                let parts = file.split('/');
-                return parts[parts.length-2] + '/' + parts[parts.length-1];
+            status_name: function(status) {
+                return status === 0 ? 'Open' : (status === 1 ? 'Busy' : 'Closed');
+            },
+            filter: function() {
+                console.log(this.status_filter);
+                this.whoopses = this.all_whoopses.filter(whoops => {
+                    console.log(whoops.status);
+                    return whoops.status === parseInt(this.status_filter);
+                });
             }
         }
     }
