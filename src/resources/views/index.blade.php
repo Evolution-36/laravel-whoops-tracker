@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/vendor/whoops-tracker/css/app.css">
 
 <div id="app">
-    <lwt-viewer></lwt-viewer>
+    <router-view></router-view>
 </div>
 
 <!-- Scripts -->

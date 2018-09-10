@@ -11,6 +11,7 @@ if (token) {
 }
 
 window.Vue = require('vue');
+const VueRouter = require('vue-router').default;
 
 window.timeago = require('timeago.js');
 
@@ -20,8 +21,17 @@ window.timeago = require('timeago.js');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('lwt-viewer', require('./components/LWTList.vue'));
+Vue.use(VueRouter);
+
+const routes = [
+    { path: '/', component: require('./components/LWTList.vue') },
+    { path: '/:id', component: require('./components/LWTShow.vue') },
+];
+
+const router = new VueRouter({
+    routes
+});
 
 const app = new Vue({
-    el: '#app'
-});
+    router
+}).$mount('#app');
