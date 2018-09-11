@@ -7,15 +7,26 @@ use Illuminate\Routing\Controller;
 
 class WhoopsController extends Controller
 {
-    public function index()
+    public function viewer()
     {
         return view('lwt::index')->with([
-            'whoopses' => LwtWhoops::with('lwtOccurrences')->get(),
+            'whoopses' => LwtWhoops::get(),
         ]);
     }
 
-    public function getAll()
+    public function index()
     {
         return response()->json(LwtWhoops::all());
+    }
+
+    public function show($whoopsId)
+    {
+        $whoops = LwtWhoops::with('lwtOccurrences')->find($whoopsId);
+        debug($whoops);
+        if ($whoops) {
+            return response()->json($whoops);
+        } else {
+            abort(404);
+        }
     }
 }

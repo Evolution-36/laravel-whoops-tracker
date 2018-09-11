@@ -63,6 +63,6 @@ class LwtWhoops extends Model
 
     public function getOccurrencesCountAttribute()
     {
-        return $this->lwtOccurrences->count();
+        return $this->lwtOccurrences()->count();
     }
 }

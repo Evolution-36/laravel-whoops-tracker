@@ -2,6 +2,9 @@
 
 namespace Evolution36\WhoopsTracker;
 
+use Evolution36\WhoopsTracker\Models\LwtWhoops;
+use Illuminate\Support\Facades\Route;
+
 class WhoopsTrackerServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**

@@ -11,15 +11,15 @@
             <div class="lwt-1col">Events</div>
             <div class="lwt-1col">Status</div>
         </div>
-        <div class="lwt-whoops lwt-row" v-for="whoops in whoopses">
+        <router-link class="lwt-whoops lwt-row" v-for="whoops in whoopses" v-bind:key="whoops.id" :to="'/' + whoops.id">
             <div class="lwt-8col">
-                <span class="error">{{ whoops.message }}</span>
-                <span class="exception">{{ whoops.exception_class }}</span>
+                <span class="error ellipsis">{{ whoops.message }}</span>
+                <span class="ellipsis">{{ whoops.exception_class }}</span>
             </div>
             <div class="lwt-2col lwt-render-timeago" :datetime="whoops.last_occurred_at">{{ whoops.last_occurred_at }}</div>
             <div class="lwt-1col">{{ whoops.occurrences_count }}</div>
             <div class="lwt-1col">{{ status_name(whoops.status) }}</div>
-        </div>
+        </router-link>
     </div>
 </template>
 

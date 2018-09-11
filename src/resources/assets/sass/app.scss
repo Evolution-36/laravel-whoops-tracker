@@ -29,27 +29,56 @@
     margin-bottom: 1rem;
     background-color: white;
 
-    .error {
-        font-weight: bold;
-        font-size: 1.2rem;
-        margin: 0.5rem 0;
+    .ellipsis {
         display: block;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
 
-    .exception {
-        display: block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    .error {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
     }
 
     .lwt-1col, .lwt-2col {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .error-long {
+        overflow: hidden;
+        word-wrap: break-word;
+        height: 50px;
+        transition: height 200ms ease-in-out;
+
+        &:hover {
+            height: 100%;
+        }
+    }
+
+    pre {
+        margin: 0;
+
+        &.prepost {
+            background-color: #333333;
+            color: white;
+        }
+
+        &.errorline {
+            background-color: #004765;
+            color: white;
+        }
+    }
+}
+a.lwt-whoops {
+    color: black;
+    transition: transform 100ms ease-in-out;
+    &:hover {
+        color: black;
+        transform: scale(1.01);
     }
 }
 
