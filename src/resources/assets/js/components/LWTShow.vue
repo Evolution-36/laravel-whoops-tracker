@@ -32,9 +32,10 @@
 
             <div class="lwt-row" v-if="occurrence">
                 <div class="lwt-8col">
-                    <pre class="prepost">{{ occurrence.log.fileContext.pre.join("\n") }}</pre>
-                    <pre class="errorline">{{ occurrence.log.fileContext.self }}</pre>
-                    <pre class="prepost">{{ occurrence.log.fileContext.post.join("\n") }}</pre>
+                    <p>{{ whoops.file }}:{{ whoops.line }}</p>
+                    <pre :class="'prettyprint linenums:' + (whoops.line - occurrence.log.fileContext.pre.length)">{{ occurrence.log.fileContext.pre.join("\n") }}</pre>
+                    <pre :class="'errorline prettyprint linenums:' + whoops.line">{{ occurrence.log.fileContext.self }}</pre>
+                    <pre :class="'prettyprint linenums:' + (parseInt(whoops.line) + 1)">{{ occurrence.log.fileContext.post.join("\n") }}</pre>
                 </div>
             </div>
         </div>
@@ -63,6 +64,7 @@
         },
         updated() {
             window.timeago().render(document.querySelectorAll('.lwt-render-timeago'));
+            PR.prettyPrint();
         },
         methods: {
             status_name: function(status) {

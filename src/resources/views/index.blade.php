@@ -7,4 +7,3 @@
 
 <!-- Scripts -->
 <script src="/vendor/whoops-tracker/js/app.js"></script>
-@stack('lwt-js')
