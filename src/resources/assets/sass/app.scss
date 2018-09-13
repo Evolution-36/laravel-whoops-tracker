@@ -67,6 +67,34 @@
             background-color: #004765 !important;
         }
     }
+
+    .trace-spot {
+        .open-spot {
+            width: 100%;
+            outline: none;
+            border: none;
+            background-color: #9acefd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            text-align: left;
+            &:hover, &.active {
+                background-color: #6a8fb0;
+            }
+
+            &.active + .trace-context {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .trace-context {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 200ms ease-in-out;
+            padding: 0;
+            margin: 0;
+        }
+    }
 }
 
 a.lwt-whoops {

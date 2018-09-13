@@ -10,7 +10,9 @@
                     <table>
                         <tr>
                             <td>Last occurrence</td>
-                            <td class="lwt-render-timeago" :datetime="whoops.last_occurred_at">{{ whoops.last_occurred_at }}</td>
+                            <td class="lwt-render-timeago" :datetime="whoops.last_occurred_at">{{
+                                whoops.last_occurred_at }}
+                            </td>
                         </tr>
                         <tr>
                             <td>Occurrences</td>
@@ -25,17 +27,27 @@
             </div>
 
             <div class="lwt-row lwt-12col">
-                <select v-model="selected_occurrence_id" @change="show_occurrence" id="lwt-status-filter">
-                    <option v-for="occurrence in whoops.lwt_occurrences" :value="occurrence.id">{{ occurrence.occurred_at }}</option>
+                <select v-model="selected_occurrence_id" @change="show_occurrence"
+                        id="lwt-status-filter">
+                    <option v-for="occurrence in whoops.lwt_occurrences" :value="occurrence.id">{{
+                        occurrence.occurred_at }}
+                    </option>
                 </select>
             </div>
 
-            <div class="lwt-row" v-if="occurrence">
-                <div class="lwt-8col">
-                    <p>{{ whoops.file }}:{{ whoops.line }}</p>
-                    <pre :class="'prettyprint linenums:' + (whoops.line - occurrence.log.fileContext.pre.length)">{{ occurrence.log.fileContext.pre.join("\n") }}</pre>
-                    <pre :class="'errorline prettyprint linenums:' + whoops.line">{{ occurrence.log.fileContext.self }}</pre>
-                    <pre :class="'prettyprint linenums:' + (parseInt(whoops.line) + 1)">{{ occurrence.log.fileContext.post.join("\n") }}</pre>
+            <div v-if="occurrence">
+                <div class="trace-spot" v-for="spot in occurrence.log.trace">
+                    <button class="open-spot">{{ spot.file }}:{{ spot.line }}</button>
+                    <div class="lwt-row trace-context">
+                        <div class="lwt-12col">
+                            <div v-if="spot.context">
+                        <pre
+                            :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
+                                <pre :class="'errorline prettyprint linenums:' + spot.line">{{ spot.context.self }}</pre>
+                                <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,20 +70,39 @@
                 this.selected_occurrence_id = this.whoops.lwt_occurrences[0].id;
                 axios.get('/lwt/occurrence/' + this.selected_occurrence_id).then(response => {
                     this.occurrence = response.data;
-                    console.log(response.data);
+                    console.log(response.data.log.trace);
                 });
             });
         },
         updated() {
             window.timeago().render(document.querySelectorAll('.lwt-render-timeago'));
             PR.prettyPrint();
+            let trace = document.getElementsByClassName("open-spot");
+            for (let i = 0; i < trace.length; i++) {
+                trace[i].addEventListener("click", function() {
+                    /* Toggle between adding and removing the "active" class,
+                    to highlight the button that controls the panel */
+                    this.classList.toggle("active");
+
+                    /* Toggle between hiding and showing the active panel */
+                    let panel = this.nextElementSibling;
+                    if (panel.style.maxHeight){
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
         },
         methods: {
-            status_name: function(status) {
+            status_name: function (status) {
                 return status === 0 ? 'Open' : (status === 1 ? 'Busy' : 'Closed');
             },
-            show_occurrence: function() {
-                console.log(this.selected_occurrence_id);
+            show_occurrence: function () {
+                axios.get('/lwt/occurrence/' + this.selected_occurrence_id).then(response => {
+                    this.occurrence = response.data;
+                    console.log(response.data);
+                });
             }
         }
     }
