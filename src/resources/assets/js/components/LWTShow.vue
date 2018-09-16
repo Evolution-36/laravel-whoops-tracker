@@ -36,19 +36,30 @@
             </div>
 
             <div v-if="occurrence">
-                <div class="trace-spot" v-for="spot in occurrence.log.trace">
-                    <button class="open-spot">{{ spot.file }}:{{ spot.line }}</button>
-                    <div class="lwt-row trace-context">
-                        <div class="lwt-12col">
-                            <div v-if="spot.context">
-                        <pre
-                            :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
-                                <pre :class="'errorline prettyprint linenums:' + spot.line">{{ spot.context.self }}</pre>
-                                <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
+                <div class="lwt-tabs lwt-row">
+                    <button class="lwt-tab" id="lwt-tab-default" v-on:click="open_tab($event, 'trace-tab')">Stack trace</button>
+                    <button class="lwt-tab" v-on:click="open_tab($event, 'session-tab')">Session info</button>
+                    <button class="lwt-tab" v-on:click="open_tab($event, 'config-tab')">Config info</button>
+                </div>
+
+                <div class="lwt-tab-content" id="trace-tab">
+                    <div class="trace-spot" v-for="spot in occurrence.log.trace">
+                        <button class="open-spot">{{ spot.file }}:{{ spot.line }}</button>
+                        <div class="lwt-row trace-context">
+                            <div class="lwt-12col">
+                                <div v-if="spot.context">
+                                    <pre
+                                        :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
+                                    <pre :class="'errorline prettyprint linenums:' + spot.line">{{ spot.context.self }}</pre>
+                                    <pre
+                                        :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="lwt-tab-content" id="session-tab">Datetime: {{ occurrence.log.datetime.date }}</div>
+                <div class="lwt-tab-content" id="config-tab">Config info</div>
             </div>
         </div>
     </div>
@@ -70,7 +81,7 @@
                 this.selected_occurrence_id = this.whoops.lwt_occurrences[0].id;
                 axios.get('/lwt/occurrence/' + this.selected_occurrence_id).then(response => {
                     this.occurrence = response.data;
-                    console.log(response.data.log.trace);
+                    console.log(response.data);
                 });
             });
         },
@@ -79,20 +90,22 @@
             PR.prettyPrint();
             let trace = document.getElementsByClassName("open-spot");
             for (let i = 0; i < trace.length; i++) {
-                trace[i].addEventListener("click", function() {
+                trace[i].addEventListener("click", function () {
                     /* Toggle between adding and removing the "active" class,
                     to highlight the button that controls the panel */
                     this.classList.toggle("active");
 
                     /* Toggle between hiding and showing the active panel */
                     let panel = this.nextElementSibling;
-                    if (panel.style.maxHeight){
+                    if (panel.style.maxHeight) {
                         panel.style.maxHeight = null;
                     } else {
                         panel.style.maxHeight = panel.scrollHeight + "px";
                     }
                 });
             }
+
+            document.getElementById('lwt-tab-default').click();
         },
         methods: {
             status_name: function (status) {
@@ -103,6 +116,18 @@
                     this.occurrence = response.data;
                     console.log(response.data);
                 });
+            },
+            open_tab: function(event, tab) {
+                Array.prototype.forEach.call(document.getElementsByClassName('lwt-tab-content'), function (tab_content) {
+                    tab_content.style.display = "none";
+                });
+
+                document.getElementById(tab).style.display = "block";
+
+                Array.prototype.forEach.call(document.getElementsByClassName('lwt-tab'), function( tab) {
+                    tab.classList.remove('active');
+                });
+                event.currentTarget.classList.add('active');
             }
         }
     }

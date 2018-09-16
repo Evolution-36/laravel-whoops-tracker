@@ -68,6 +68,29 @@
         }
     }
 
+    .lwt-tabs {
+        display: flex;
+    }
+
+    .lwt-tab {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 1rem;
+        background-color: #9acefd;
+        margin: 1rem;
+        cursor: pointer;
+
+        &:hover, &.active {
+            background-color: #6a8fb0;
+        }
+
+    }
+
+    .lwt-tab-content {
+        display: none;
+    }
+
     .trace-spot {
         .open-spot {
             width: 100%;
