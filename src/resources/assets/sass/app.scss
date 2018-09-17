@@ -70,6 +70,19 @@
 
     .lwt-tabs {
         display: flex;
+        position: relative;
+        padding: 1rem;
+
+        &::after {
+            content: "";
+            width: 100%;
+            background-color: #333333;
+            height: 1px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 80%;
+        }
     }
 
     .lwt-tab {
@@ -77,18 +90,42 @@
         border: none;
         outline: none;
         padding: 1rem;
-        background-color: #9acefd;
-        margin: 1rem;
         cursor: pointer;
+        border-radius: 10px 10px 0 0;
+        background-color: #f5f5f5;
 
-        &:hover, &.active {
-            background-color: #6a8fb0;
+        &:hover {
+            border: 1px solid black;
+        }
+        &.active {
+            border: 1px solid black;
+            border-bottom: 1px solid white;
+            z-index: 1;
+            background-color: #fff;
         }
 
     }
 
     .lwt-tab-content {
         display: none;
+        padding: 1rem;
+    }
+
+    #trace-tab {
+        #app-only {
+            outline: none;
+            border: none;
+            background: none;
+            padding: 0.5rem 0.7rem;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+
+            &.active {
+                box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.4);
+                background-color: #fff;
+            }
+        }
     }
 
     .trace-spot {
@@ -96,13 +133,13 @@
             width: 100%;
             outline: none;
             border: none;
-            background-color: #9acefd;
+            border-bottom: 1px solid black;
             padding: 1rem;
-            margin-bottom: 1rem;
+            background-color: transparent;
             cursor: pointer;
             text-align: left;
             &:hover, &.active {
-                background-color: #6a8fb0;
+                background-color: #f5f5f5;
             }
 
             &.active + .trace-context {
@@ -116,6 +153,19 @@
             transition: max-height 200ms ease-in-out;
             padding: 0;
             margin: 0;
+        }
+
+        span {
+            background-color: #333333;
+            color: white;
+            border-radius: 5px;
+            padding: 0 5px;
+            text-align: center;
+            line-height: 30px;
+            display: inline-block;
+            min-width: 30px;
+            height: 30px;
+            margin-right: 1rem;
         }
     }
 }

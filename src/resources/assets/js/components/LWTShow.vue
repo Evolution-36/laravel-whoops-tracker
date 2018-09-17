@@ -43,8 +43,9 @@
                 </div>
 
                 <div class="lwt-tab-content" id="trace-tab">
-                    <div class="trace-spot" v-for="spot in occurrence.log.trace">
-                        <button class="open-spot">{{ spot.file }}:{{ spot.line }}</button>
+                    <button id="app-only" class="active" v-on:click="toggle_app_only($event)">Application only</button>
+                    <div class="trace-spot" v-for="(spot, index) in occurrence.log.trace" v-if="spot.inApp || !app_only">
+                        <button class="open-spot"><span>{{ index }}</span>{{ spot.file }}:{{ spot.line }}</button>
                         <div class="lwt-row trace-context">
                             <div class="lwt-12col">
                                 <div v-if="spot.context">
@@ -71,7 +72,8 @@
             return {
                 whoops: undefined,
                 selected_occurrence_id: 1,
-                occurrence: undefined
+                occurrence: undefined,
+                app_only: true
             }
         },
         mounted() {
@@ -128,6 +130,10 @@
                     tab.classList.remove('active');
                 });
                 event.currentTarget.classList.add('active');
+            },
+            toggle_app_only: function(event) {
+                event.currentTarget.classList.toggle('active');
+                this.app_only = !this.app_only;
             }
         }
     }
