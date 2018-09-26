@@ -145,6 +145,19 @@
             &.active + .trace-context {
                 margin-bottom: 1rem;
             }
+
+            span {
+                background-color: #333333;
+                color: white;
+                border-radius: 5px;
+                padding: 0 5px;
+                text-align: center;
+                line-height: 30px;
+                display: inline-block;
+                min-width: 30px;
+                height: 30px;
+                margin-right: 1rem;
+            }
         }
 
         .trace-context {
@@ -153,19 +166,6 @@
             transition: max-height 200ms ease-in-out;
             padding: 0;
             margin: 0;
-        }
-
-        span {
-            background-color: #333333;
-            color: white;
-            border-radius: 5px;
-            padding: 0 5px;
-            text-align: center;
-            line-height: 30px;
-            display: inline-block;
-            min-width: 30px;
-            height: 30px;
-            margin-right: 1rem;
         }
     }
 }
