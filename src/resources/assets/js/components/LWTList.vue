@@ -1,9 +1,7 @@
 <template>
     <div id="lwt-viewer">
         <select v-model="status_filter" @change="filter" id="lwt-status-filter">
-            <option value="0">Open</option>
-            <option value="1">Busy</option>
-            <option value="2">Closed</option>
+            <option v-for="status in status_filter_options" :value="status.value">{{ status.name }}</option>
         </select>
         <div id="lwt-header" class="lwt-row">
             <div class="lwt-8col">Error</div>
@@ -39,7 +37,7 @@
         mounted() {
             axios.get('/lwt/whoopses').then(response => {
                 this.all_whoopses = response.data;
-                this.whoopses = this.all_whoopses;
+                this.filter();
             });
         },
         updated() {
