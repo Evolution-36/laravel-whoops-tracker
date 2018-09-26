@@ -24,7 +24,11 @@
 </template>
 
 <script>
+    import status from '../mixins/status';
     export default {
+        mixins: [
+          status
+        ],
         data () {
             return {
                 whoopses: [],
@@ -42,9 +46,6 @@
             window.timeago().render(document.querySelectorAll('.lwt-render-timeago'));
         },
         methods: {
-            status_name: function(status) {
-                return status === 0 ? 'Open' : (status === 1 ? 'Busy' : 'Closed');
-            },
             filter: function() {
                 console.log(this.status_filter);
                 this.whoopses = this.all_whoopses.filter(whoops => {

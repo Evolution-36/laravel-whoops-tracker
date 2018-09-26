@@ -67,7 +67,11 @@
 </template>
 
 <script>
+    import status from '../mixins/status';
     export default {
+        mixins: [
+            status
+        ],
         data() {
             return {
                 whoops: undefined,
@@ -110,9 +114,6 @@
             document.getElementById('lwt-tab-default').click();
         },
         methods: {
-            status_name: function (status) {
-                return status === 0 ? 'Open' : (status === 1 ? 'Busy' : 'Closed');
-            },
             show_occurrence: function () {
                 axios.get('/lwt/occurrence/' + this.selected_occurrence_id).then(response => {
                     this.occurrence = response.data;

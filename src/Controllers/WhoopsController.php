@@ -22,7 +22,7 @@ class WhoopsController extends Controller
     public function show($whoopsId)
     {
         $whoops = LwtWhoops::with('lwtOccurrences')->find($whoopsId);
-        debug($whoops);
+
         if ($whoops) {
             return response()->json($whoops);
         } else {
