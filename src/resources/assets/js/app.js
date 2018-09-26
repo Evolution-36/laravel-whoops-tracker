@@ -26,8 +26,8 @@ require('./prettify.js');
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', component: require('./components/LWTList.vue') },
-    { path: '/:id', component: require('./components/LWTShow.vue') },
+    { path: '/', component: require('./components/LWTList.vue'), name:'list' },
+    { path: '/:id', component: require('./components/LWTShow.vue'), name:'show' },
 ];
 
 const router = new VueRouter({

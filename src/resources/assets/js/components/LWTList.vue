@@ -11,7 +11,7 @@
             <div class="lwt-1col">Events</div>
             <div class="lwt-1col">Status</div>
         </div>
-        <router-link class="lwt-whoops lwt-row" v-for="whoops in whoopses" v-bind:key="whoops.id" :to="'/' + whoops.id">
+        <router-link class="lwt-whoops lwt-row" v-for="whoops in whoopses" v-bind:key="whoops.id" :to="{name:'show', params: {id: whoops.id}}">
             <div class="lwt-8col">
                 <span class="error ellipsis">{{ whoops.message }}</span>
                 <span class="ellipsis">{{ whoops.exception_class }}</span>
