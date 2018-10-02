@@ -11,6 +11,7 @@ class OccurrenceController extends Controller
     {
         $occurrence = LwtOccurrence::findOrFail($occurrenceId);
         $occurrence->log = $occurrence->log_file;
+
         return response()->json($occurrence);
     }
 }

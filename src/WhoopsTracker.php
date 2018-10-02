@@ -37,14 +37,15 @@ class WhoopsTracker
         $fileSystem = $this->app['files'];
         if (!$fileSystem->isDirectory(storage_path('whoops-tracker'))) {
             if ($fileSystem->makeDirectory(storage_path('whoops-tracker'), 0777, true)) {
-                $fileSystem->put(storage_path('whoops-tracker') . '/.gitignore', "*\n!.gitignore\n");
+                $fileSystem->put(storage_path('whoops-tracker').'/.gitignore', "*\n!.gitignore\n");
             } else {
                 throw new \Exception("Cannot create directory '$this->dirname'..");
             }
         }
 
-        $logLocation = storage_path('whoops-tracker') . '/' . Carbon::now()
-                ->format('d_m_Y_His') . '-' . uniqid() . '.json';
+        $logLocation = storage_path('whoops-tracker').'/'.Carbon::now()
+                ->format('d_m_Y_His').'-'.uniqid().'.json';
+
         try {
             $fileSystem->put($logLocation, json_encode($data));
         } catch (\Exception $e) {
@@ -63,10 +64,11 @@ class WhoopsTracker
         foreach ($trace as $traceItem) {
             if (array_key_exists('file', $traceItem)) {
                 $traceItem['context'] = $this->fileContext($traceItem['file'], $traceItem['line']);
-                $traceItem['inApp'] = strpos($traceItem['file'], base_path() . '/vendor') === false;
+                $traceItem['inApp'] = strpos($traceItem['file'], base_path().'/vendor') === false;
             }
             $traceWithContext[] = $traceItem;
         }
+
         return $traceWithContext;
     }
 
@@ -84,7 +86,6 @@ class WhoopsTracker
         $context->put('post', collect());
         $contextLines = 5;
         if (file_exists($fileName)) {
-
             try {
                 $file = new \SplFileObject($fileName);
                 $target = max(0, ($lineNumber - ($contextLines + 1)));
@@ -114,6 +115,7 @@ class WhoopsTracker
                 return $context;
             }
         }
+
         return $context;
     }
 
