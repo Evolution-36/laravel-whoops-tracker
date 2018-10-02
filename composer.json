@@ -4,7 +4,6 @@
     "type": "library",
     "require": {
         "php": ">=7.0",
-        "illuminate/config": "~5.5.0|~5.6.0|~5.7.0",
         "illuminate/database": "~5.5.0|~5.6.0|~5.7.0",
         "illuminate/support": "~5.5.0|~5.6.0|~5.7.0",
         "illuminate/routing": "~5.5.0|~5.6.0|~5.7.0"
@@ -21,12 +20,15 @@
             "email": "info@evolution36.com"
         }
     ],
-    "minimum-stability": "dev",
     "extra": {
         "laravel": {
             "providers": [
                 "Evolution36\\WhoopsTracker\\WhoopsTrackerServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.4.2|~3.5.0|~3.6.0|~3.7.0",
+        "phpunit/phpunit" : "^5.7|6.2|^7.0"
     }
 }
