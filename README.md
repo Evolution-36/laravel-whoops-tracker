@@ -1,3 +1,6 @@
+[![StyleCI](https://github.styleci.io/repos/151218164/shield)](https://github.styleci.io/repos/151218164)
+[![TravisCI](https://travis-ci.org/Evolution-36/laravel-whoops-tracker.svg?branch=dev)](https://travis-ci.org/Evolution-36/laravel-whoops-tracker/)
+
 ## Current status
 - Assets can currently be compiled into a public directory within the package.
 - With `php artisan vendor:publish --tag=public`, users can publish the assets to their project
