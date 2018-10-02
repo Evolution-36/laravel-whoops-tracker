@@ -2,9 +2,6 @@
 
 namespace Evolution36\WhoopsTracker;
 
-use Evolution36\WhoopsTracker\Models\LwtWhoops;
-use Illuminate\Support\Facades\Route;
-
 class WhoopsTrackerServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
@@ -26,7 +23,7 @@ class WhoopsTrackerServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishes([
             __DIR__.'/public' => public_path('vendor/whoops-tracker'),
         ], 'public');
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'lwt');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'lwt');
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/whoops-tracker'),
         ], 'views');
