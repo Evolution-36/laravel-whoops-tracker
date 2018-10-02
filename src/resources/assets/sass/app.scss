@@ -1,238 +1,284 @@
 @charset "UTF-8";
 @import "tomorrow-night-eighties.min.css";
 
-#lwt-viewer {
-    font-size: 14px;
-    padding: 0 1rem;
-}
+#lwt {
+    @import "toggle";
 
-#lwt-status-filter {
-    display: block;
-    max-width: 200px;
-}
-
-#lwt-header {
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-bottom: 0rem;
-
-    .lwt-1col, .lwt-2col {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    * {
+        box-sizing: border-box;
     }
-}
 
-.lwt-whoops {
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12),
-    0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    margin-bottom: 1rem;
-    background-color: white;
+    a {
+        text-decoration: none;
+    }
 
-    .ellipsis {
+    select {
+        background-color: rgba(255, 255, 255, 0.9);
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        height: 3rem;
+    }
+
+    table {
+        border-spacing: 0;
+        border-collapse: collapse;
+
+        tr {
+            border-bottom: 1px solid #ccc;
+        }
+
+        td {
+            padding: 0.7rem 1rem;
+        }
+    }
+
+    #viewer {
+        font-size: 14px;
+        padding: 1rem;
+    }
+
+    #status-filter {
         display: block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        max-width: 200px;
     }
 
-    .error {
+    #header {
         font-weight: bold;
         font-size: 1.2rem;
-        margin: 0.5rem 0;
-    }
+        margin-bottom: 0rem;
 
-    .lwt-1col, .lwt-2col {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .error-long {
-        overflow: hidden;
-        word-wrap: break-word;
-        height: 50px;
-        transition: height 200ms ease-in-out;
-
-        &:hover {
-            height: 100%;
+        .col1, .col2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 
-    pre {
-        margin: 0;
+    .whoops {
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.12),
+        0 1px 5px 0 rgba(0, 0, 0, 0.2);
+        margin-bottom: 1rem;
+        background-color: white;
 
-        &.errorline * {
-            background-color: #004765 !important;
-        }
-    }
-
-    .lwt-tabs {
-        display: flex;
-        position: relative;
-        padding: 1rem;
-
-        &::after {
-            content: "";
-            width: 100%;
-            background-color: #333333;
-            height: 1px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 80%;
-        }
-    }
-
-    .lwt-tab {
-        flex: 1;
-        border: none;
-        outline: none;
-        padding: 1rem;
-        cursor: pointer;
-        border-radius: 10px 10px 0 0;
-        background-color: #f5f5f5;
-
-        &:hover {
-            border: 1px solid black;
-        }
-        &.active {
-            border: 1px solid black;
-            border-bottom: 1px solid white;
-            z-index: 1;
-            background-color: #fff;
+        .ellipsis {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
-    }
+        .exception {
+            font-size: 0.8rem;
+        }
 
-    .lwt-tab-content {
-        display: none;
-        padding: 1rem;
-    }
+        .error {
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
 
-    #trace-tab {
-        #app-only {
-            outline: none;
+        .col1, .col2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error-long {
+            overflow: hidden;
+            word-wrap: break-word;
+            height: 50px;
+            transition: height 200ms ease-in-out;
+
+            &:hover {
+                height: 100%;
+            }
+        }
+
+        pre {
+            margin: 0;
+
+            &.errorline * {
+                background-color: #004765 !important;
+            }
+        }
+
+        .tabs {
+            position: relative;
+            padding: 0 1rem;
+
+            &::after {
+                content: "";
+                width: 100%;
+                background-color: #333333;
+                height: 1px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 98%;
+            }
+        }
+
+        .tab {
+            min-width: 150px;
             border: none;
-            background: none;
-            padding: 0.5rem 0.7rem;
-            border-radius: 5px;
-            background-color: #f0f0f0;
+            outline: none;
+            padding: 1rem;
             cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            background-color: #f5f5f5;
 
+            &:not(:first-of-type) {
+                margin-left: 0.5rem;
+            }
+
+            &:hover {
+                border: 1px solid black;
+            }
             &.active {
-                box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.4);
+                border: 1px solid black;
+                border-bottom: 1px solid white;
+                z-index: 1;
                 background-color: #fff;
             }
-        }
-    }
 
-    .trace-spot {
-        .open-spot {
-            width: 100%;
-            outline: none;
-            border: none;
-            border-bottom: 1px solid black;
+        }
+
+        .tab-content {
+            display: none;
             padding: 1rem;
-            background-color: transparent;
-            cursor: pointer;
-            text-align: left;
-            &:hover, &.active {
-                background-color: #f5f5f5;
-            }
 
-            &.active + .trace-context {
-                margin-bottom: 1rem;
+            &.active {
+                display: block;
             }
+        }
 
-            span {
-                background-color: #333333;
-                color: white;
+        #trace-tab {
+            #app-only {
+                outline: none;
+                border: none;
+                background: none;
+                padding: 0.5rem 0.7rem;
                 border-radius: 5px;
-                padding: 0 5px;
-                text-align: center;
-                line-height: 30px;
-                display: inline-block;
-                min-width: 30px;
-                height: 30px;
-                margin-right: 1rem;
+                background-color: #f0f0f0;
+                cursor: pointer;
+
+                &.active {
+                    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+                    background-color: #fff;
+                }
             }
         }
 
-        .trace-context {
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 200ms ease-in-out;
-            padding: 0;
-            margin: 0;
+        .trace-spot {
+            .open-spot {
+                width: 100%;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid black;
+                padding: 1rem;
+                background-color: transparent;
+                cursor: pointer;
+                text-align: left;
+                &:hover, &.active {
+                    background-color: #f5f5f5;
+                }
+
+                &.active + .trace-context {
+                    margin-bottom: 1rem;
+                }
+
+                span {
+                    background-color: #333333;
+                    color: white;
+                    border-radius: 5px;
+                    padding: 0 5px;
+                    text-align: center;
+                    line-height: 30px;
+                    display: inline-block;
+                    min-width: 30px;
+                    height: 30px;
+                    margin-right: 1rem;
+                }
+            }
+
+            .trace-context {
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 200ms ease-in-out;
+                padding: 0;
+                margin: 0;
+            }
         }
     }
-}
 
-a.lwt-whoops {
-    color: black;
-    transition: transform 100ms ease-in-out;
-    &:hover {
+    a.whoops {
         color: black;
-        transform: scale(1.01);
+        transition: transform 100ms ease-in-out;
+        &:hover {
+            color: black;
+            transform: scale(1.01);
+        }
     }
-}
 
-.lwt-row {
-    margin-bottom: 1rem;
-    padding: 1rem 0;
-    display: flex;
-}
+    .row {
+        margin-bottom: 1rem;
+        padding: 1rem 0;
+        display: flex;
+    }
 
-.lwt-1col, .lwt-2col, .lwt-3col, .lwt-4col, .lwt-5col, .lwt-6col, .lwt-7col, .lwt-8col, .lwt-9col, .lwt-10col, .lwt-11col, .lwt-12col {
-    padding: 0 1rem;
-}
+    .col1, .col2, .col3, .col4, .col5, .col6, .col7, .col8, .col9, .col10, .col11, .col12 {
+        padding: 0 1rem;
+    }
 
-.lwt-1col {
-    width: 8.33%;
-}
+    .col1 {
+        width: 8.33%;
+    }
 
-.lwt-2col {
-    width: 16.67%;
-}
+    .col2 {
+        width: 16.67%;
+    }
 
-.lwt-3col {
-    width: 25%;
-}
+    .col3 {
+        width: 25%;
+    }
 
-.lwt-4col {
-    width: 33.33%;
-}
+    .col4 {
+        width: 33.33%;
+    }
 
-.lwt-5col {
-    width: 41.67%;
-}
+    .col5 {
+        width: 41.67%;
+    }
 
-.lwt-6col {
-    width: 50%;
-}
+    .col6 {
+        width: 50%;
+    }
 
-.lwt-7col {
-    width: 58.33%;
-}
+    .col7 {
+        width: 58.33%;
+    }
 
-.lwt-8col {
-    width: 66.67%;
-}
+    .col8 {
+        width: 66.67%;
+    }
 
-.lwt-9col {
-    width: 75%;
-}
+    .col9 {
+        width: 75%;
+    }
 
-.lwt-10col {
-    width: 83.33%;
-}
+    .col10 {
+        width: 83.33%;
+    }
 
-.lwt-11col {
-    width: 91.67%;
-}
+    .col11 {
+        width: 91.67%;
+    }
 
-.lwt-12col {
-    width: 100%;
+    .col12 {
+        width: 100%;
+    }
 }
