@@ -25,7 +25,7 @@ class LwtWhoops extends Model
 
     protected $appends = [
         'last_occurred_at',
-        'occurrences_count'
+        'occurrences_count',
     ];
 
     const OPEN = 0;
@@ -43,7 +43,7 @@ class LwtWhoops extends Model
 
     public static function generateHash($file, $line, $message, $logLevel, $exceptionClass)
     {
-        return hash('sha256', $file . $line . $message . $logLevel . $exceptionClass);
+        return hash('sha256', $file.$line.$message.$logLevel.$exceptionClass);
     }
 
     public function isOpen()
@@ -58,7 +58,7 @@ class LwtWhoops extends Model
 
     public function getLastOccurredAtAttribute()
     {
-        return $this->lwtOccurrences()->orderBy('occurred_at','DESC')->first()->occurred_at->format('c');
+        return $this->lwtOccurrences()->orderBy('occurred_at', 'DESC')->first()->occurred_at->format('c');
     }
 
     public function getOccurrencesCountAttribute()

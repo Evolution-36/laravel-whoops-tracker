@@ -11,7 +11,7 @@ class LwtOccurrence extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'occurred_at'
+        'occurred_at',
     ];
 
     public function lwtWhoops()
@@ -23,6 +23,7 @@ class LwtOccurrence extends Model
     {
         $fileSystem = app()['files'];
         $file = json_decode($fileSystem->get($this->log_location));
+
         return $file;
     }
 }
