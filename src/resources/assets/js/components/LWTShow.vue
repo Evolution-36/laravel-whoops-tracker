@@ -1,16 +1,16 @@
 <template>
-    <div id="lwt-shower">
-        <div class="lwt-whoops" v-if="whoops">
-            <div class="lwt-row">
-                <div class="lwt-8col">
+    <div id="shower">
+        <div class="whoops" v-if="whoops">
+            <div class="row">
+                <div class="col8">
                     <h5>{{ whoops.exception_class }}</h5>
                     <p class="error-long">{{ whoops.message }}</p>
                 </div>
-                <div class="lwt-4col">
+                <div class="col4">
                     <table>
                         <tr>
                             <td>Last occurrence</td>
-                            <td class="lwt-render-timeago" :datetime="whoops.last_occurred_at">{{
+                            <td class="render-timeago" :datetime="whoops.last_occurred_at">{{
                                 whoops.last_occurred_at }}
                             </td>
                         </tr>
@@ -26,9 +26,9 @@
                 </div>
             </div>
 
-            <div class="lwt-row lwt-12col">
+            <div class="row col12">
                 <select v-model="selected_occurrence_id" @change="show_occurrence"
-                        id="lwt-status-filter">
+                        id="status-filter">
                     <option v-for="occurrence in whoops.lwt_occurrences" :value="occurrence.id">{{
                         occurrence.occurred_at }}
                     </option>
@@ -36,18 +36,32 @@
             </div>
 
             <div v-if="occurrence">
-                <div class="lwt-tabs lwt-row">
-                    <button class="lwt-tab" id="lwt-tab-default" v-on:click="open_tab($event, 'trace-tab')">Stack trace</button>
-                    <button class="lwt-tab" v-on:click="open_tab($event, 'session-tab')">Session info</button>
-                    <button class="lwt-tab" v-on:click="open_tab($event, 'config-tab')">Config info</button>
+                <div class="tabs row">
+                    <button class="tab active" id="tab-default" v-on:click="open_tab($event, 'trace-tab')">
+                        Stack trace
+                    </button>
+                    <button class="tab" v-on:click="open_tab($event, 'session-tab')">Session info
+                    </button>
+                    <button class="tab" v-on:click="open_tab($event, 'config-tab')">Config info
+                    </button>
                 </div>
 
-                <div class="lwt-tab-content" id="trace-tab">
-                    <button id="app-only" class="active" v-on:click="toggle_app_only($event)">Application only</button>
-                    <div class="trace-spot" v-for="(spot, index) in occurrence.log.trace" v-if="spot.inApp || !app_only">
-                        <button class="open-spot"><span>{{ index }}</span>{{ spot.file }}:{{ spot.line }}</button>
-                        <div class="lwt-row trace-context">
-                            <div class="lwt-12col">
+                <div class="tab-content active" id="trace-tab">
+                    <p class="toggle-input">
+                        Application only
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="slider" v-on:click="toggle_app_only()"></span>
+                        </label>
+                    </p>
+                    <!--<button id="app-only" class="active">Application only</button>-->
+                    <div class="trace-spot" v-for="(spot, index) in occurrence.log.trace"
+                         v-if="spot.inApp || !app_only">
+                        <button class="open-spot"><span>{{ index }}</span>{{ spot.file }}:{{
+                            spot.line }}
+                        </button>
+                        <div class="row trace-context">
+                            <div class="col12">
                                 <div v-if="spot.context">
                                     <pre
                                         :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
@@ -59,8 +73,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="lwt-tab-content" id="session-tab">Datetime: {{ occurrence.log.datetime.date }}</div>
-                <div class="lwt-tab-content" id="config-tab">Config info</div>
+                <div class="tab-content" id="session-tab">
+                    Datetime: {{ occurrence.log.datetime.date }}
+                </div>
+                <div class="tab-content" id="config-tab">
+                    Config info
+                </div>
             </div>
         </div>
     </div>
@@ -68,6 +86,7 @@
 
 <script>
     import status from '../mixins/status';
+
     export default {
         mixins: [
             status
@@ -92,7 +111,7 @@
             });
         },
         updated() {
-            window.timeago().render(document.querySelectorAll('.lwt-render-timeago'));
+            window.timeago().render(document.querySelectorAll('.render-timeago'));
             PR.prettyPrint();
             let trace = document.getElementsByClassName("open-spot");
             for (let i = 0; i < trace.length; i++) {
@@ -110,8 +129,6 @@
                     }
                 });
             }
-
-            document.getElementById('lwt-tab-default').click();
         },
         methods: {
             show_occurrence: function () {
@@ -120,20 +137,19 @@
                     console.log(response.data);
                 });
             },
-            open_tab: function(event, tab) {
-                Array.prototype.forEach.call(document.getElementsByClassName('lwt-tab-content'), function (tab_content) {
-                    tab_content.style.display = "none";
+            open_tab: function (event, tab) {
+                Array.prototype.forEach.call(document.getElementsByClassName('tab-content'), function (tab_content) {
+                    tab_content.classList.remove('active');
                 });
 
-                document.getElementById(tab).style.display = "block";
+                document.getElementById(tab).classList.add('active');
 
-                Array.prototype.forEach.call(document.getElementsByClassName('lwt-tab'), function( tab) {
+                Array.prototype.forEach.call(document.getElementsByClassName('tab'), function (tab) {
                     tab.classList.remove('active');
                 });
                 event.currentTarget.classList.add('active');
             },
-            toggle_app_only: function(event) {
-                event.currentTarget.classList.toggle('active');
+            toggle_app_only: function () {
                 this.app_only = !this.app_only;
             }
         }

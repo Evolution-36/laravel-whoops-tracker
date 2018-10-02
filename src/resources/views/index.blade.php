@@ -1,9 +1,20 @@
-<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/vendor/whoops-tracker/css/app.css">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Laravel Whoops Tracker</title>
 
-<div id="lwt">
-    <router-view></router-view>
-</div>
-
-<!-- Scripts -->
-<script src="/vendor/whoops-tracker/js/app.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #eceff1;
+        }
+    </style>
+</head>
+<body>
+    @include('lwt::viewer')
+</body>
+</html>
