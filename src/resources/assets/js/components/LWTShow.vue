@@ -37,12 +37,15 @@
 
             <div v-if="occurrence">
                 <div class="tabs row">
-                    <button class="tab active" id="tab-default" v-on:click="open_tab($event, 'trace-tab')">
+                    <button class="tab active" id="tab-default"
+                            v-on:click="open_tab($event, 'trace-tab')">
                         Stack trace
                     </button>
-                    <button class="tab" v-on:click="open_tab($event, 'session-tab')">Session info
+                    <button class="tab" v-on:click="open_tab($event, 'session-tab')">
+                        Session info
                     </button>
-                    <button class="tab" v-on:click="open_tab($event, 'config-tab')">Config info
+                    <button class="tab" v-on:click="open_tab($event, 'config-tab')">
+                        Config info
                     </button>
                 </div>
 
@@ -50,24 +53,27 @@
                     <p class="toggle-input">
                         Application only
                         <label class="toggle">
-                            <input type="checkbox" checked>
-                            <span class="slider" v-on:click="toggle_app_only()"></span>
+                            <input type="checkbox" checked v-on:click="toggle_app_only()">
+                            <span class="slider"></span>
                         </label>
                     </p>
-                    <!--<button id="app-only" class="active">Application only</button>-->
                     <div class="trace-spot" v-for="(spot, index) in occurrence.log.trace"
-                         v-if="spot.inApp || !app_only">
-                        <button class="open-spot"><span>{{ index }}</span>{{ spot.file }}:{{
-                            spot.line }}
+                         v-show="spot.inApp || !app_only">
+                        <button class="open-spot" v-on:click="open_spot($event)">
+                            <span>{{ index }}</span>{{ spot.file }}:{{ spot.line }}
                         </button>
                         <div class="row trace-context">
                             <div class="col12">
                                 <div v-if="spot.context">
-                                    <pre
-                                        :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
-                                    <pre :class="'errorline prettyprint linenums:' + spot.line">{{ spot.context.self }}</pre>
-                                    <pre
-                                        :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
+                                    <pre :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">
+                                        {{ spot.context.pre.join("\n") }}
+                                    </pre>
+                                    <pre :class="'errorline prettyprint linenums:' + spot.line">
+                                        {{ spot.context.self }}
+                                    </pre>
+                                    <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">
+                                        {{ spot.context.post.join("\n") }}
+                                    </pre>
                                 </div>
                             </div>
                         </div>
@@ -113,22 +119,6 @@
         updated() {
             window.timeago().render(document.querySelectorAll('.render-timeago'));
             PR.prettyPrint();
-            let trace = document.getElementsByClassName("open-spot");
-            for (let i = 0; i < trace.length; i++) {
-                trace[i].addEventListener("click", function () {
-                    /* Toggle between adding and removing the "active" class,
-                    to highlight the button that controls the panel */
-                    this.classList.toggle("active");
-
-                    /* Toggle between hiding and showing the active panel */
-                    let panel = this.nextElementSibling;
-                    if (panel.style.maxHeight) {
-                        panel.style.maxHeight = null;
-                    } else {
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                    }
-                });
-            }
         },
         methods: {
             show_occurrence: function () {
@@ -151,6 +141,16 @@
             },
             toggle_app_only: function () {
                 this.app_only = !this.app_only;
+            },
+            open_spot: function (event) {
+                event.target.classList.toggle("active");
+
+                let panel = event.target.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
             }
         }
     }
