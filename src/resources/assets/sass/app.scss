@@ -96,11 +96,14 @@
         .error-long {
             overflow: hidden;
             word-wrap: break-word;
-            height: 50px;
-            transition: height 200ms ease-in-out;
+            max-height: 50px;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 3px;
+            background-color: #f5f5f5;
 
-            &:hover {
-                height: 100%;
+            &.active {
+                max-height: 100%;
             }
         }
 

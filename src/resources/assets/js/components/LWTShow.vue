@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col8">
                     <h5>{{ whoops.exception_class }}</h5>
-                    <p class="error-long">{{ whoops.message }}</p>
+                    <p class="error-long" v-on:click="open_error($event)">{{ whoops.message }}</p>
                 </div>
                 <div class="col4">
                     <table>
@@ -145,6 +145,9 @@
                 } else {
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 }
+            },
+            open_error: function (event) {
+                event.target.classList.toggle("active");
             }
         }
     }
