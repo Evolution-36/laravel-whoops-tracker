@@ -65,15 +65,9 @@
                         <div class="row trace-context">
                             <div class="col12">
                                 <div v-if="spot.context">
-                                    <pre :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">
-                                        {{ spot.context.pre.join("\n") }}
-                                    </pre>
-                                    <pre :class="'errorline prettyprint linenums:' + spot.line">
-                                        {{ spot.context.self }}
-                                    </pre>
-                                    <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">
-                                        {{ spot.context.post.join("\n") }}
-                                    </pre>
+                                    <pre :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
+                                    <pre :class="'errorline prettyprint linenums:' + spot.line">{{ spot.context.self }}</pre>
+                                    <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
                                 </div>
                             </div>
                         </div>
