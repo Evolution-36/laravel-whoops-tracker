@@ -46,6 +46,10 @@
         padding: 1em;
     }
 
+    label[for='status-filter'] {
+        font-size: 1em;
+        color: black;
+    }
     #status-filter {
         display: block;
         max-width: 200px;
@@ -132,7 +136,8 @@
         }
 
         .tab {
-            min-width: 150px;
+            width: 100%;
+            max-width: 165px;
             border: none;
             outline: none;
             padding: 1em;

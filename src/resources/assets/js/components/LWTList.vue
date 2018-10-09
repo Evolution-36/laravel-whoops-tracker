@@ -49,6 +49,8 @@
                 this.whoopses = this.all_whoopses.filter(whoops => {
                     console.log(whoops.status);
                     return whoops.status === parseInt(this.status_filter);
+                }).sort((whoops_a, whoops_b) => {
+                    return new Date(whoops_b.last_occurred_at).getTime() - new Date(whoops_a.last_occurred_at).getTime();
                 });
             }
         }

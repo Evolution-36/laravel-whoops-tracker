@@ -27,12 +27,15 @@
             </div>
 
             <div class="row col12">
-                <select v-model="selected_occurrence_id" @change="show_occurrence"
-                        id="status-filter">
-                    <option v-for="occurrence in whoops.lwt_occurrences" :value="occurrence.id">{{
-                        occurrence.occurred_at }}
-                    </option>
-                </select>
+                <div>
+                    <label for="status-filter">Occurrence</label>
+                    <select v-model="selected_occurrence_id" @change="show_occurrence"
+                            id="status-filter">
+                        <option v-for="occurrence in whoops.lwt_occurrences" :value="occurrence.id">{{
+                            occurrence.occurred_at }}
+                        </option>
+                    </select>
+                </div>
             </div>
 
             <div v-if="occurrence">
@@ -41,15 +44,19 @@
                             v-on:click="open_tab($event, 'trace-tab')">
                         Stack trace
                     </button>
-                    <button class="tab" v-on:click="open_tab($event, 'session-tab')">
-                        Session info
+                    <button class="tab" v-on:click="open_tab($event, 'request-tab')">
+                        Request info
                     </button>
-                    <button class="tab" v-on:click="open_tab($event, 'config-tab')">
-                        Config info
+                    <button class="tab" v-on:click="open_tab($event, 'env-tab')">
+                        Environment settings
+                    </button>
+                    <button class="tab" v-on:click="open_tab($event, 'server-tab')">
+                        Server data
                     </button>
                 </div>
 
                 <div class="tab-content active" id="trace-tab">
+                    <h4>Stack trace</h4>
                     <p class="toggle-input">
                         Application only
                         <label class="toggle">
@@ -65,19 +72,110 @@
                         <div class="row trace-context">
                             <div class="col12">
                                 <div v-if="spot.context">
-                                    <pre :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
+                                    <pre
+                                        :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
                                     <pre :class="'errorline prettyprint linenums:' + spot.line">{{ spot.context.self }}</pre>
-                                    <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
+                                    <pre
+                                        :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="session-tab">
-                    Datetime: {{ occurrence.log.datetime.date }}
+                <div class="tab-content" id="request-tab">
+                    <h4>GET parameters</h4>
+                    <table v-if="!Array.isArray(occurrence.log.request.query)">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr v-for="(value, parameter) in occurrence.log.request.query">
+                            <td>{{ parameter }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    </table>
+                    <p v-else>
+                        No GET parameters
+                    </p>
+
+                    <h4>POST parameters</h4>
+                    <table v-if="!Array.isArray(occurrence.log.request.request)">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr v-for="(value, parameter) in occurrence.log.request.request">
+                            <td>{{ parameter }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    </table>
+                    <p v-else>
+                        No POST parameters
+                    </p>
+
+                    <h4>Cookies</h4>
+                    <table v-if="!Array.isArray(occurrence.log.request.cookies)">
+                        <tr>
+                            <th>Cookie</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr v-for="(value, cookie) in occurrence.log.request.cookies">
+                            <td>{{ cookie }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    </table>
+
+                    <p v-else>
+                        No cookies
+                    </p>
+
+                    <h4>Request headers</h4>
+                    <table v-if="!Array.isArray(occurrence.log.request.headers)">
+                        <tr>
+                            <th>Header</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr v-for="(value, header) in occurrence.log.request.headers">
+                            <td>{{ header }}</td>
+                            <td>{{ value[0] }}</td>
+                        </tr>
+                    </table>
+
+                    <p v-else>
+                        No headers
+                    </p>
                 </div>
-                <div class="tab-content" id="config-tab">
-                    Config info
+                <div class="tab-content" id="server-tab">
+                    <h4>Server data</h4>
+                    <table v-if="!Array.isArray(occurrence.log.request.server)">
+                        <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr v-for="(value, name) in occurrence.log.request.server">
+                            <td>{{ name }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    </table>
+                    <p v-else>
+                        No server settings
+                    </p>
+                </div>
+                <div class="tab-content" id="env-tab">
+                    <h4>Environment settings</h4>
+                    <table v-if="!Array.isArray(occurrence.log.environment)">
+                        <tr>
+                            <th>Setting</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr v-for="(value, setting) in occurrence.log.environment">
+                            <td>{{ setting }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    </table>
+                    <p v-else>
+                        No server settings
+                    </p>
                 </div>
             </div>
         </div>
@@ -119,6 +217,7 @@
                 axios.get('/lwt/occurrence/' + this.selected_occurrence_id).then(response => {
                     this.occurrence = response.data;
                     console.log(response.data);
+                    console.log(response.data.log.request.files);
                 });
             },
             open_tab: function (event, tab) {
