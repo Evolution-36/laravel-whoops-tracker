@@ -2,7 +2,7 @@
 
 namespace Evolution36\WhoopsTracker\Test;
 
-use Orchestra\Testbench\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class BasicTest extends TestCase
 {
