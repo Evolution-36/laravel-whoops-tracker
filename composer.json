@@ -3,7 +3,7 @@
     "description": "Packages for tracking all information about errors that occured in your application. Great for debugging errors in a production environment. Also provides a nice dashboard for displaying the errors.",
     "type": "library",
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "illuminate/database": "~5.5.0|~5.6.0|~5.7.0",
         "illuminate/support": "~5.5.0|~5.6.0|~5.7.0",
         "illuminate/routing": "~5.5.0|~5.6.0|~5.7.0"
@@ -28,7 +28,6 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "~3.4.2|~3.5.0|~3.6.0|~3.7.0",
-        "phpunit/phpunit" : "^5.7|6.2|^7.0"
+        "phpunit/phpunit" : "^7.0"
     }
 }

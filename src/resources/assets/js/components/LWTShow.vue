@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col8">
                     <h5>{{ whoops.exception_class }}</h5>
-                    <p class="error-long">{{ whoops.message }}</p>
+                    <p class="error-long" v-on:click="open_error($event)">{{ whoops.message }}</p>
                 </div>
                 <div class="col4">
                     <table>
@@ -65,15 +65,9 @@
                         <div class="row trace-context">
                             <div class="col12">
                                 <div v-if="spot.context">
-                                    <pre :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">
-                                        {{ spot.context.pre.join("\n") }}
-                                    </pre>
-                                    <pre :class="'errorline prettyprint linenums:' + spot.line">
-                                        {{ spot.context.self }}
-                                    </pre>
-                                    <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">
-                                        {{ spot.context.post.join("\n") }}
-                                    </pre>
+                                    <pre :class="'prettyprint linenums:' + (spot.line - spot.context.pre.length)">{{ spot.context.pre.join("\n") }}</pre>
+                                    <pre :class="'errorline prettyprint linenums:' + spot.line">{{ spot.context.self }}</pre>
+                                    <pre :class="'prettyprint linenums:' + (parseInt(spot.line) + 1)">{{ spot.context.post.join("\n") }}</pre>
                                 </div>
                             </div>
                         </div>
@@ -151,6 +145,9 @@
                 } else {
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 }
+            },
+            open_error: function (event) {
+                event.target.classList.toggle("active");
             }
         }
     }
