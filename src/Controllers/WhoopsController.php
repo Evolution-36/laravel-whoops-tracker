@@ -16,7 +16,7 @@ class WhoopsController extends Controller
 
     public function index()
     {
-        return response()->json(LwtWhoops::all());
+        return response()->json(LwtWhoops::get());
     }
 
     public function show($whoopsId)

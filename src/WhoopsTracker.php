@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Evolution36\WhoopsTracker\Models\LwtOccurrence;
 use Evolution36\WhoopsTracker\Models\LwtWhoops;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Facades\DB;
 
 class WhoopsTracker
 {
@@ -31,7 +30,7 @@ class WhoopsTracker
             ->put('request', $this->requestToArray(request()))
             ->put('trace', $this->exceptionToArray($exception))
             ->put('config', config()->all())
-            ->put('queries', DB::getQueryLog())
+            ->put('environment', $_ENV)
             ->put('fileContext', $this->fileContext($exception->getFile(), $exception->getLine()));
 
         $fileSystem = $this->app['files'];
